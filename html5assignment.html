@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML5 Shapes in Order</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+        canvas {
+            border: 1px solid black;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>HTML5 Shapes in Order</h1>
+    <canvas id="shapesCanvas" width="500" height="620"></canvas>
+
+    <script>
+        // Get the canvas element and its context
+        const canvas = document.getElementById("shapesCanvas");
+        const ctx = canvas.getContext("2d");
+
+        let yPosition = 20; // Starting y position for the first shape
+
+        // Function to draw a rectangle
+        function drawRectangle() {
+            ctx.fillStyle = "blue";
+            ctx.fillRect(50, yPosition, 100, 60); // x, y, width, height
+            yPosition += 80; // Add spacing for the next shape
+        }
+
+        // Function to draw a circle
+        function drawCircle() {
+            ctx.beginPath();
+            ctx.arc(100, yPosition + 30, 30, 0, 2 * Math.PI); // x, y, radius, startAngle, endAngle
+            ctx.fillStyle = "red";
+            ctx.fill();
+            yPosition += 80; // Add spacing for the next shape
+        }
+
+        // Function to draw a triangle
+        function drawTriangle() {
+            ctx.beginPath();
+            ctx.moveTo(100, yPosition); // Starting point
+            ctx.lineTo(70, yPosition + 60); // Bottom-left corner
+            ctx.lineTo(130, yPosition + 60); // Bottom-right corner
+            ctx.closePath(); // Connect back to the starting point
+            ctx.fillStyle = "green";
+            ctx.fill();
+            yPosition += 80; // Add spacing for the next shape
+        }
+
+        // Function to draw an ellipse
+        function drawEllipse() {
+            ctx.beginPath();
+            ctx.ellipse(100, yPosition + 30, 50, 25, 0, 0, 2 * Math.PI); // x, y, radiusX, radiusY, rotation, startAngle, endAngle
+            ctx.fillStyle = "orange";
+            ctx.fill();
+            yPosition += 80; // Add spacing for the next shape
+        }
+
+        // Function to draw a rounded rectangle
+        function drawRoundedRectangle() {
+            const drawRoundedRect = (x, y, width, height, radius) => {
+                ctx.beginPath();
+                ctx.moveTo(x + radius, y);
+                ctx.lineTo(x + width - radius, y);
+                ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+                ctx.lineTo(x + width, y + height - radius);
+                ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+                ctx.lineTo(x + radius, y + height);
+                ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+                ctx.lineTo(x, y + radius);
+                ctx.quadraticCurveTo(x, y, x + radius, y);
+                ctx.closePath();
+                ctx.fillStyle = "cyan";
+                ctx.fill();
+            };
+
+            drawRoundedRect(50, yPosition, 100, 50, 15);
+            yPosition += 80; // Add spacing for the next shape
+        }
+
+        // Draw all shapes in order (excluding the line)
+        drawRectangle();
+        drawCircle();
+        drawTriangle();
+        drawEllipse();
+        drawRoundedRectangle();
+    </script>
+</body>
+</html>
